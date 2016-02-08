@@ -1,0 +1,7 @@
+mysql> source data/import-table-structure.sql
+
+mysql> source data/import-account.sql
+
+mysql> source data/import-addressbook.sql
+
+mysql> source data/import-entry.sql
