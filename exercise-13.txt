@@ -1,0 +1,26 @@
+//How many Address Book Entries have phones starting with area code 3XX?
+mysql> SELECT count(*) FROM Entry WHERE (subtype='phone' AND (contentLineOne LIKE '_3%' OR contentLineOne LIKE'1-3%'));                                                            
++----------+
+| count(*) |
++----------+
+|       60 |
++----------+
+1 row in set (0.01 sec)
+
+//How many Address Book Entries have home phones not containing the digit 5?
+mysql> SELECT count(*) FROM Entry WHERE (type='home' AND subtype='phone' AND (contentLineOne NOT LIKE '%5%'));                                                                     
++----------+
+| count(*) |
++----------+
+|       76 |
++----------+
+1 row in set (0.00 sec)
+
+//How many Address Book Entries are work phones starting with a country code?
+mysql> SELECT count(*) FROM Entry WHERE (type='work' AND subtype='phone' AND (contentLineOne LIKE '_-%'));                                                                         
++----------+
+| count(*) |
++----------+
+|       60 |
++----------+
+1 row in set (0.00 sec)

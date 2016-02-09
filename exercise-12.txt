@@ -117,3 +117,5 @@ mysql> SELECT addressBookId, COUNT(addressBookId) FROM Entry GROUP BY addressBoo
 |            37 |                   52 |
 +---------------+----------------------+
 110 rows in set (0.01 sec)
+
+addressBookId 37 has the most entries at 52.
