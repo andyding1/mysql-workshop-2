@@ -1,0 +1,51 @@
+TABLE: Customer
+id auto_increment primary key
+name VARCHAR(50);
+email VARCHAR(50);
+
+TABLE: Inventory
+id auto_increment primary key
+name VARCHAR(100)
+priceInCents int
+brand VARCHAR(50)
+expirationDate DATETIME
+stockDate DATETIME
+
+TABLE: Invoices
+id auto_increment primary key
+customerId int (will match id of Customer Table)
+inventoryId int (will match id of Inventory Table)
+date DATETIME
+amountInCents int
+type ENUM('sale','refund')
+internal BOOLEAN
+
+
+What is the Store’s income within a specific date range?
+    SELECT SUM(amountInCents) FROM Invoices WHERE type='sale';
+
+What is the Store’s top selling Inventory product?
+    SELECT max(inventoryId) FROM Invoices WHERE type='sale';
+    SELECT name FROM Inventory WHERE id=*answer from above*;
+
+Which company produces the top selling Inventory product?
+    SELECT max(inventoryId) FROM Invoices WHERE type='sale';
+    SELECT brand FROM Inventory WHERE id=*answer from above*;
+
+What is the top refunded Inventory product?
+    SELECT max(inventoryId) FROM Invoices WHERE type='refund';
+    SELECT name FROM Inventory WHERE id=*answer from above*;
+
+Which products should be taken out from the Store’s Inventory?
+    SELECT name FROM Inventory WHERE expirationDate<NOW();
+
+Which companies should the Store stop selling products from?
+    SELECT brand FROM Invoices WHERE type='refund';
+    Stop selling the top brands that are refunded!!!!
+
+What is the amount of Internal (Canadian) vs. External sales?
+    SELECT COUNT(*) FROM Invoices WHERE Internal=TRUE;
+    SELECT COUNT(*) FROM Invoices WHERE Internal=FALSE;
+
+How many of a specific product remains in Inventory for a specific date?
+    SELECT name, count(name) FROM Inventory WHERE (NOW()<expirationDate and stockDate>NOW());
